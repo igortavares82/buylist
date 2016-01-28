@@ -1,0 +1,19 @@
+{
+  "name": "buylist",
+  "version": "1.0.0",
+  "description": "test project for nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igortavares82/buylist.git"
+  },
+  "author": "igor tavares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igortavares82/buylist/issues"
+  },
+  "homepage": "https://github.com/igortavares82/buylist#readme"
+}
