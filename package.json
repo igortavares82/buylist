@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/igortavares82/buylist/issues"
   },
-  "homepage": "https://github.com/igortavares82/buylist#readme"
+  "homepage": "https://github.com/igortavares82/buylist#readme",
+  "dependencies": {
+    "express": "3.x"
+  }
 }
