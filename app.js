@@ -1,10 +1,10 @@
 var express = require('express');
+var users = require('./routes/accounts.js');
+
 var app = express();
 
-app.get('/users', function(req, res) {
-
-    res.send([{ name: 'igor tavares', age: 32 }]);
-});
+app.use('/', routes);
+app.use('/accounts', accounts);
 
 app.listen(3000);
 console.log('listening on port 3000');
