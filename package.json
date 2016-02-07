@@ -18,6 +18,8 @@
   "homepage": "https://github.com/igortavares82/buylist#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
-    "express": "4.x"
+    "express": "^4.13.4",
+    "model-binder": "0.0.1",
+    "mongoose": "^4.4.2"
   }
 }

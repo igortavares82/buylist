@@ -1,19 +1,26 @@
 module.exports = function(app) {
 
     var route = '/account';
-    var all = [{ id: 1, name: 'igor tavares', age: 32 },
-               { id: 2, name: 'kenia monteiro', age: 39 }];
+    var binder = require('model-binder');
+
+    var database = require('../helpers/database.js');
+    var db = new database().getConnection();
 
     app.get(route + '/all', function(req, res) {
-        res.send(all);
+
     });
 
     app.get(route + '/get/:id', function (req, res) {
 
-        res.send(all[req.params.id]);
     });
 
-    app.post(route + '/create', function (req, res) {
+    app.post(route + '/create', binder(require('../models/account')), function (req, res) {
+
+        try {
+
+        } catch (ex) {
+
+        }
 
         res.send(all[req.param('id')]);
     });
