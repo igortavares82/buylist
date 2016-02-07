@@ -1,10 +1,16 @@
 var express = require('express');
-var users = require('./routes/accounts.js');
-
+var http = require('http');
 var app = express();
 
-app.use('/', routes);
-app.use('/accounts', accounts);
+app.set('port', process.env.PORT || 3000);
+app.set('account', require('./routes/account')(app));
+app.set('list', require('./routes/list')(app));
 
-app.listen(3000);
-console.log('listening on port 3000');
+http.createServer(app).listen(app.get('port'), function() {
+
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+
+
