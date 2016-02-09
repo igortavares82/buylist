@@ -4,6 +4,6 @@ module.exports = function () {
     this.birth = null;
     this.email = null;
     this.isActive = true;
-    this.userpname = null;
+    this.username = null;
     this.password = null;
 }
