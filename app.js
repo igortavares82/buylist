@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('account', require('./routes/account')(app));
 app.set('list', require('./routes/list')(app));
+app.set('listitem', require('./routes/listitem')(app));
 
 http.createServer(app).listen(app.get('port'), function() {
 

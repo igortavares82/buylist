@@ -19,8 +19,8 @@ module.exports = function () {
 
         var schema = {
 
-            name: String,
-            price: Number
+            name: { type: String, required: true },
+            price: { type: Number, required: true }
         }
 
         return schema;
@@ -35,7 +35,7 @@ module.exports = function () {
             owner: String,
             isPublic: Boolean,
             isDraft: Boolean,
-            items: [this.listitem()]
+            items: [{ type : Mongoose.Schema.ObjectId, ref : 'ListItems' }]
         }
 
         return schema;

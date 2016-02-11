@@ -1,9 +1,9 @@
-module.exports = function(app) {
+module.exports = function (app) {
 
-    var route = '/account';
+    var route = '/listitem';
     var mongoose = require('../helpers/mongoose.js');
     var schemas = require('../helpers/schema');
-    var model = mongoose.mongoose.model('Account', new schemas().account(), 'accounts');
+    var model = mongoose.mongoose.model('ListItem', new schemas().listitem(), 'ListItems');
 
     app.get(route + '/all', function(req, res) {
 
@@ -20,8 +20,8 @@ module.exports = function(app) {
         } catch (ex) {
 
             res.send(ex);
-
         }
+
     });
 
     app.get(route + '/get/:id', function (req, res) {
@@ -39,7 +39,6 @@ module.exports = function(app) {
         } catch (ex) {
 
             res.send(ex);
-
         }
     });
 
@@ -49,21 +48,17 @@ module.exports = function(app) {
 
             mongoose.open();
 
-            var account = new model({
+            var listitem = new model({
 
                 name: req.body.name,
-                birth: req.body.birth,
-                email: req.body.email,
-                isActive: true,
-                username: req.body.username,
-                password: req.body.password
+                price: req.body.price,
 
             }).save(function (err) {
 
                 if (err)
                     res.send(err);
                 else
-                    res.send("account saved successfully");
+                    res.send("list item saved successfully");
 
                 mongoose.close();
             });
@@ -81,6 +76,22 @@ module.exports = function(app) {
 
     app.delete(route + '/delete', function (req, res) {
 
-        res.send(all[req.param('id')]);
+        mongoose.open();
+
+        try {
+
+            model.remove({ _id: req.body.id }, function (err) {
+
+                if (err)
+                    res.send(err);
+                else
+                    res.send('list item deleted successfully');
+            });
+
+        } catch(ex) {
+
+            res.send(ex);
+        }
+
     });
 }
