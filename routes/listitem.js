@@ -71,7 +71,34 @@ module.exports = function (app) {
 
     app.put(route + '/update', function (req, res) {
 
-        res.send(all[req.param('id')]);
+         try {
+
+            mongoose.open();
+
+            model.update(
+                { _id: req.body.id },
+                {
+                    $set: {
+                        'name': req.body.name,
+                        'price': req.body.price
+                    }
+                },
+                function (err, place) {
+
+                     if (err)
+                        res.send(err);
+                     else
+                        res.send(place);
+
+                    mongoose.close();
+                });
+
+
+
+        } catch (ex) {
+
+            res.send(ex);
+        }
     });
 
     app.delete(route + '/delete', function (req, res) {
