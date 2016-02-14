@@ -12,6 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
+app.use('/', require('./helpers/tokenvalidator'));
+
 app.set('account', require('./routes/account')(app));
 app.set('list', require('./routes/list')(app));
 app.set('listitem', require('./routes/listitem')(app));

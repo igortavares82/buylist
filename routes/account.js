@@ -6,6 +6,7 @@ module.exports = function(app) {
     var jwt = require('jsonwebtoken');
     var model = mongoose.mongoose.model('Account', new schemas().account(), 'accounts');
 
+
     app.get(route + '/all', function(req, res) {
 
         try {
@@ -24,6 +25,7 @@ module.exports = function(app) {
 
         }
     });
+
 
     app.get(route + '/get/:id', function (req, res) {
 
@@ -52,14 +54,12 @@ module.exports = function(app) {
 
             if (ac.length == 1) {
 
-                var token = jwt.sign(ac, app.get('superSecret'), {
-
-                    expiresInMinutes: 1440
-                });
+                var token = jwt.sign(ac, app.get('superSecret'), {});
 
                 res.send({
                     success: true,
                     message: 'authentication performed successfully',
+                    account: ac,
                     token: token
                 });
             } else {
