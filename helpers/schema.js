@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 module.exports = function () {
 
     this.account = function () {
@@ -30,12 +32,12 @@ module.exports = function () {
 
         var schema = {
 
-            name: String,
+            name: { type: String, required: true },
             createDate: Date,
-            owner: String,
+            account: { type : mongoose.Schema.Types.ObjectId, ref : 'Account' },
             isPublic: Boolean,
             isDraft: Boolean,
-            items: [{ type : Mongoose.Schema.ObjectId, ref : 'ListItems' }]
+            items: [{ type : mongoose.Schema.Types.ObjectId, ref : 'ListItem' }]
         }
 
         return schema;

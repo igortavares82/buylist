@@ -48,7 +48,7 @@ module.exports = function (app) {
 
             mongoose.open();
 
-            var listitem = new model({
+            model({
 
                 name: req.body.name,
                 price: req.body.price,

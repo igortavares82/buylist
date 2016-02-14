@@ -3,6 +3,7 @@ module.exports = function(app) {
     var route = '/account';
     var mongoose = require('../helpers/mongoose.js');
     var schemas = require('../helpers/schema');
+    var jwt = require('jsonwebtoken');
     var model = mongoose.mongoose.model('Account', new schemas().account(), 'accounts');
 
     app.get(route + '/all', function(req, res) {
@@ -41,6 +42,36 @@ module.exports = function(app) {
             res.send(ex);
 
         }
+    });
+
+    app.post(route + '/auth', function (req, res) {
+
+        mongoose.open();
+
+        model.find({ username: req.body.username, password: req.body.password }, function (err, ac) {
+
+            if (ac.length == 1) {
+
+                var token = jwt.sign(ac, app.get('superSecret'), {
+
+                    expiresInMinutes: 1440
+                });
+
+                res.send({
+                    success: true,
+                    message: 'authentication performed successfully',
+                    token: token
+                });
+            } else {
+
+                res.send({
+                    success: false,
+                    message: 'username or password not correct'
+                });
+            }
+
+            mongoose.close();
+        });
     });
 
     app.post(route + '/create', function (req, res) {
