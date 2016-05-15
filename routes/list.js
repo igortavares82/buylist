@@ -42,6 +42,7 @@ module.exports = function(app) {
                 account: req.body.account,
                 isPublic: false,
                 isDraft: true,
+                description: req.body.description,
                 items: req.body.items
 
             }).save(function (err) {
@@ -74,6 +75,7 @@ module.exports = function(app) {
                         account: req.body.account,
                         isPublic: req.body.isPublic,
                         isDraft: req.body.isDraft,
+                        description: req.body.description,
                         items: req.body.items
                     }
                 },

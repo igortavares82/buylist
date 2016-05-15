@@ -10,6 +10,7 @@ module.exports = function () {
             birth: Date,
             email: String,
             isActive: Boolean,
+            lists:[{ type : mongoose.Schema.Types.ObjectId, ref : 'List' }],
             username: { type: String, required: true, unique: true },
             password: { type: String, required: true }
         }
@@ -22,7 +23,8 @@ module.exports = function () {
         var schema = {
 
             name: { type: String, required: true },
-            price: { type: Number, required: true }
+            price: { type: Number, required: true },
+            lastUpdate: { type: Date, required: true }
         }
 
         return schema;
@@ -37,6 +39,8 @@ module.exports = function () {
             account: { type : mongoose.Schema.Types.ObjectId, ref : 'Account' },
             isPublic: Boolean,
             isDraft: Boolean,
+            description: String,
+            description: String,
             items: [{ type : mongoose.Schema.Types.ObjectId, ref : 'ListItem' }]
         }
 

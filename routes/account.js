@@ -13,10 +13,13 @@ module.exports = function(app) {
 
             mongoose.open();
 
-            model.find({}, function (err, docs) {
+            model.find({})
+            .populate('lists')
+            .exec(function (err, docs) {
 
                 res.send(docs);
                 mongoose.close();
+
             });
 
         } catch (ex) {
@@ -33,10 +36,13 @@ module.exports = function(app) {
 
             mongoose.open();
 
-            model.find({ _id: req.params.id }, function (err, docs) {
+            model.find({ _id: req.params.id })
+            .populate('lists')
+            .exec(function (err, docs) {
 
                 res.send(docs);
                 mongoose.close();
+
             });
 
         } catch (ex) {
@@ -86,6 +92,7 @@ module.exports = function(app) {
                 birth: req.body.birth,
                 email: req.body.email,
                 isActive: true,
+                lists: req.body.lists,
                 username: req.body.username,
                 password: req.body.password
 
@@ -107,11 +114,39 @@ module.exports = function(app) {
 
     app.put(route + '/update', function (req, res) {
 
-        res.send(all[req.param('id')]);
+        try {
+
+            mongoose.open();
+
+            model.update(
+            { _id: req.body.id },
+            {
+                $set: {
+                    name: req.body.name,
+                    birth: req.body.birth,
+                    email: req.body.email,
+                    isActive: req.body.isActive,
+                    lists: req.body.lists,
+                }
+            },
+            function (err, place) {
+
+                 if (err)
+                    res.send(err);
+                 else
+                    res.send(place);
+
+                mongoose.close();
+            });
+
+        } catch (ex) {
+
+            res.send(ex);
+        }
     });
 
     app.delete(route + '/delete', function (req, res) {
 
-        res.send(all[req.param('id')]);
+
     });
 }

@@ -52,6 +52,7 @@ module.exports = function (app) {
 
                 name: req.body.name,
                 price: req.body.price,
+                lastUpdate: new Date()
 
             }).save(function (err) {
 
@@ -79,8 +80,9 @@ module.exports = function (app) {
                 { _id: req.body.id },
                 {
                     $set: {
-                        'name': req.body.name,
-                        'price': req.body.price
+                        name: req.body.name,
+                        price: req.body.price,
+                        lastUpdate: new Date()
                     }
                 },
                 function (err, place) {
