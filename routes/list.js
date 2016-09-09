@@ -29,6 +29,35 @@ module.exports = function(app) {
 
     });
 
+    app.get(route + '/paginate/:current/:pagesize', function(req, res) {
+
+        try {
+
+            mongoose.open();
+
+            model
+            .find({_id: {$gt: req.params.current}})
+            .skip(N * req.params.pagesize)
+            .limit(req.params.pagesize)
+            .populate('account')
+            .populate('items')
+            .sort({_id: -1})
+            .exec(function(err, docs){
+
+                res.send(docs);
+
+            });
+
+        } catch (ex) {
+
+            res.send(ex);
+        } finally {
+
+            mongoose.close();
+        }
+
+    });
+
     app.post(route + '/create', function (req, res) {
 
         try {
